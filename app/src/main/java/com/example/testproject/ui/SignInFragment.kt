@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.testproject.BaseFragment
 import com.example.testproject.R
 import com.example.testproject.databinding.FragmentSignInBinding
 
-class SignInFragment : Fragment() {
+class SignInFragment : BaseFragment() {
 
     companion object {
         fun newInstance() = SignInFragment()
@@ -20,7 +20,11 @@ class SignInFragment : Fragment() {
 
     private lateinit var viewModel: SignInViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val binding = FragmentSignInBinding.inflate(inflater, container, false)
         this.binding = binding
         binding.register.setOnClickListener { onRegisterClick() }
@@ -40,5 +44,4 @@ class SignInFragment : Fragment() {
         binding = null
         super.onDestroyView()
     }
-
 }
