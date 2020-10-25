@@ -6,4 +6,6 @@ interface AuthRepository {
 
     suspend fun findByEmail(email: String): User?
 
+    suspend fun saveUserData(user: User): Long
+
 }

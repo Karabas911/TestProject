@@ -9,4 +9,8 @@ class AuthRepositoryImpl(private val userDao: UserDao) : AuthRepository {
         return userDao.findByEmail(email)
     }
 
+    override suspend fun saveUserData(user: User): Long {
+        return userDao.insert(user)
+    }
+
 }

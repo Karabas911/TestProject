@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.testproject.BaseFragment
+import com.example.testproject.R
 import com.example.testproject.Resource
 import com.example.testproject.databinding.FragmentSignUpBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -40,7 +41,8 @@ class SignUpFragment : BaseFragment() {
     private fun onSighUpEventChanged(resource: Resource<Int>) {
         when (resource.status) {
             Status.SUCCESS -> {
-
+                hideProgress()
+                showMessage(R.string.registration_success)
             }
             Status.ERROR -> {
                 hideProgress()
@@ -62,6 +64,8 @@ class SignUpFragment : BaseFragment() {
 
             SignUpViewModel.ERROR_REASON_CONFIRM_PASSWORD ->
                 binding?.let { it.confirmPassword.error = errorMessage }
+
+            SignUpViewModel.ERROR_REASON_DATABASE -> showMessage(msgRes)
         }
     }
 

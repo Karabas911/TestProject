@@ -13,6 +13,7 @@ import com.example.testproject.SingleLiveEvent
 import com.example.testproject.model.User
 import com.example.testproject.prefs.PreferenceWrapper
 import com.example.testproject.repo.AuthRepository
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class SignUpViewModel(
@@ -22,13 +23,12 @@ class SignUpViewModel(
 
     companion object {
         const val TAG = "SignUpViewModel"
-
         private const val MIN_PASSWORD_LENGTH = 4
-
         const val ERROR_REASON_EMAIL = 1
         const val ERROR_REASON_PHONE = 2
         const val ERROR_REASON_PASSWORD = 3
         const val ERROR_REASON_CONFIRM_PASSWORD = 4
+        const val ERROR_REASON_DATABASE = 5
     }
 
     private val sighUpEvent = SingleLiveEvent<Resource<Int>>()
@@ -41,9 +41,18 @@ class SignUpViewModel(
                 && phoneIsValid(phone)
                 && passwordIsValid(password, confirmPassword)
             ) {
+                sighUpEvent.value = Resource.loading()
+                delay(3000)
                 val userId = prefs.getNextUserId()
                 Log.d(TAG, "Verified: userId = $userId")
                 val user = User(userId, email, phone, password)
+                val savedUserRows = repository.saveUserData(user)
+                if (savedUserRows > 0){
+                    sighUpEvent.value = Resource.success()
+                    prefs.setLoginUserId(userId)
+                }else{
+                    sighUpEvent.value = Resource.error(ERROR_REASON_DATABASE, R.string.error_save)
+                }
             }
         }
     }

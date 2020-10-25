@@ -1,5 +1,6 @@
 package com.example.testproject
 
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.testproject.ui.ProgressDialog
 
@@ -18,5 +19,9 @@ open class BaseFragment : Fragment() {
             progress?.dismiss()
             progress = null
         }
+    }
+
+    fun showMessage(msgRes: Int) {
+        Toast.makeText(requireContext(), msgRes, Toast.LENGTH_LONG).show()
     }
 }

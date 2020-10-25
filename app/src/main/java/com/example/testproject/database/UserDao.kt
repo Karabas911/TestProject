@@ -16,7 +16,7 @@ interface UserDao {
     suspend fun findByEmail(email: String): User?
 
     @Insert
-    fun insertAll(vararg users: User)
+    suspend fun insert(user: User): Long
 
     @Delete
     fun delete(user: User)

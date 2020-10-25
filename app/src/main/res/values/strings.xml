@@ -9,4 +9,6 @@
     <string name="error_provide_confirm_password">Please, provide confirm password</string>
     <string name="error_valid_password">Password must be at least 4 characters long</string>
     <string name="error_valid_confirm_password">Passwords do not match</string>
+    <string name="error_save">User data save ERROR!!!</string>
+    <string name="registration_success">Congratulations, you are successfully registered!</string>
 </resources>
