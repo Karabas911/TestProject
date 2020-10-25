@@ -55,7 +55,8 @@ class SignUpViewModel(private val repository: AuthRepository) : ViewModel() {
                 false
             }
             user != null -> {
-                sighUpEvent.value = Resource.error(ERROR_REASON_EMAIL, R.string.error_registered_email)
+                sighUpEvent.value =
+                    Resource.error(ERROR_REASON_EMAIL, R.string.error_registered_email)
                 false
             }
             else -> true
@@ -66,9 +67,11 @@ class SignUpViewModel(private val repository: AuthRepository) : ViewModel() {
     private fun phoneIsValid(phone: String): Boolean {
         return when {
             TextUtils.isEmpty(phone) -> {
+                sighUpEvent.value = Resource.error(ERROR_REASON_PHONE, R.string.error_provide_phone)
                 false
             }
             !PhoneNumberUtils.isGlobalPhoneNumber(phone) -> {
+                sighUpEvent.value = Resource.error(ERROR_REASON_PHONE, R.string.error_valid_phone)
                 false
             }
             else -> true
@@ -77,29 +80,31 @@ class SignUpViewModel(private val repository: AuthRepository) : ViewModel() {
 
     private fun passwordIsValid(password: String, confirmPassword: String): Boolean {
         return when {
-
             TextUtils.isEmpty(password) -> {
-
+                sighUpEvent.value =
+                    Resource.error(ERROR_REASON_PASSWORD, R.string.error_provide_password)
                 false
             }
-
             TextUtils.isEmpty(confirmPassword) -> {
-
+                sighUpEvent.value = Resource.error(
+                    ERROR_REASON_CONFIRM_PASSWORD,
+                    R.string.error_provide_confirm_password
+                )
                 false
             }
-
             password.length < MIN_PASSWORD_LENGTH -> {
-
+                sighUpEvent.value =
+                    Resource.error(ERROR_REASON_PASSWORD, R.string.error_valid_password)
                 false
             }
-
-            !password.equals(confirmPassword) -> {
-
+            password != confirmPassword -> {
+                sighUpEvent.value = Resource.error(
+                    ERROR_REASON_CONFIRM_PASSWORD,
+                    R.string.error_valid_confirm_password
+                )
                 false
             }
-
             else -> true
-
         }
     }
 }

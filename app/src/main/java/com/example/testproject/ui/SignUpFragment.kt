@@ -51,10 +51,17 @@ class SignUpFragment : BaseFragment() {
     }
 
     private fun handleError(errorReason: Int, msgRes: Int) {
+        val errorMessage = getString(msgRes)
         when (errorReason) {
-            SignUpViewModel.ERROR_REASON_EMAIL -> {
-                binding?.let { it.email.error = getString(msgRes) }
-            }
+            SignUpViewModel.ERROR_REASON_EMAIL -> binding?.let { it.email.error = errorMessage }
+
+            SignUpViewModel.ERROR_REASON_PHONE -> binding?.let { it.phone.error = errorMessage }
+
+            SignUpViewModel.ERROR_REASON_PASSWORD ->
+                binding?.let { it.password.error = errorMessage }
+
+            SignUpViewModel.ERROR_REASON_CONFIRM_PASSWORD ->
+                binding?.let { it.confirmPassword.error = errorMessage }
         }
     }
 

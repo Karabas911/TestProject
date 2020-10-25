@@ -3,4 +3,10 @@
     <string name="error_provide_email">Please provide email</string>
     <string name="error_valid_email">Please provide valid email</string>
     <string name="error_registered_email">Email is already registered. Please try to Login</string>
+    <string name="error_provide_phone">Please, provide phone number</string>
+    <string name="error_valid_phone">Please, provide valid phone number</string>
+    <string name="error_provide_password">Please, provide password</string>
+    <string name="error_provide_confirm_password">Please, provide confirm password</string>
+    <string name="error_valid_password">Password must be at least 4 characters long</string>
+    <string name="error_valid_confirm_password">Passwords do not match</string>
 </resources>
