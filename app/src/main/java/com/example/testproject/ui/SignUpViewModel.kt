@@ -11,10 +11,14 @@ import com.example.testproject.R
 import com.example.testproject.Resource
 import com.example.testproject.SingleLiveEvent
 import com.example.testproject.model.User
+import com.example.testproject.prefs.PreferenceWrapper
 import com.example.testproject.repo.AuthRepository
 import kotlinx.coroutines.launch
 
-class SignUpViewModel(private val repository: AuthRepository) : ViewModel() {
+class SignUpViewModel(
+    private val repository: AuthRepository,
+    private val prefs: PreferenceWrapper
+) : ViewModel() {
 
     companion object {
         const val TAG = "SignUpViewModel"
@@ -37,8 +41,9 @@ class SignUpViewModel(private val repository: AuthRepository) : ViewModel() {
                 && phoneIsValid(phone)
                 && passwordIsValid(password, confirmPassword)
             ) {
-                Log.d(TAG, "Verified")
-                val user = User(1, email, phone, password)
+                val userId = prefs.getNextUserId()
+                Log.d(TAG, "Verified: userId = $userId")
+                val user = User(userId, email, phone, password)
             }
         }
     }
