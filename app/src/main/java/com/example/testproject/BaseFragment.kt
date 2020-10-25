@@ -8,12 +8,12 @@ open class BaseFragment : Fragment() {
     private var progress: ProgressDialog? = null
 
     fun showProgress() {
-        cancelProgress()
+        hideProgress()
         progress = ProgressDialog.newInstance()
         progress?.show(childFragmentManager, ProgressDialog.TAG)
     }
 
-    private fun cancelProgress() {
+    fun hideProgress() {
         if (progress != null) {
             progress?.dismiss()
             progress = null

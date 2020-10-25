@@ -13,7 +13,7 @@ interface UserDao {
     fun getAll(): List<User>
 
     @Query("SELECT * FROM users WHERE email = :email LIMIT 1")
-    fun findByEmail(email: String): User
+    suspend fun findByEmail(email: String): User?
 
     @Insert
     fun insertAll(vararg users: User)

@@ -9,10 +9,6 @@ import org.koin.dsl.module
 
 object AppModules {
 
-    val appModules = arrayListOf(
-        authModule
-    )
-
     val databaseModule = module {
 
         single {
@@ -23,4 +19,9 @@ object AppModules {
             ).build()
         }
     }
+
+    val appModules = arrayListOf(
+        authModule,
+        databaseModule
+    )
 }
