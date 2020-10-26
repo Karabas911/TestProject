@@ -13,10 +13,10 @@ class PreferenceWrapperImpl(private val prefs: SharedPreferences) : PreferenceWr
     }
 
     override fun getLoginUserId(): Int {
-        return prefs.get(PrefsKeys.USER_REGISTRATION_ID, 0)!!
+        return prefs.get(PrefsKeys.LOGGED_USER_ID, 0)!!
     }
 
     override fun setLoginUserId(userId: Int) {
-        prefs.set(PrefsKeys.USER_REGISTRATION_ID, userId)
+        prefs.set(PrefsKeys.LOGGED_USER_ID, userId)
     }
 }

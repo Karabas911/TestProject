@@ -11,4 +11,7 @@
     <string name="error_valid_confirm_password">Passwords do not match</string>
     <string name="error_save">User data save ERROR!!!</string>
     <string name="registration_success">Congratulations, you are successfully registered!</string>
+    <string name="error_empty_field">Please, fill in all fields</string>
+    <string name="error_not_registered">User with provided email is NOT signed up. Please try to sign up first</string>
+    <string name="error_wrong_password">Wrong password</string>
 </resources>

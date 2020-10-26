@@ -13,10 +13,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignUpFragment : BaseFragment() {
 
-    companion object {
-        fun newInstance() = SignUpFragment()
-    }
-
     private var binding: FragmentSignUpBinding? = null
 
     private val viewModel: SignUpViewModel by viewModel()
@@ -43,6 +39,7 @@ class SignUpFragment : BaseFragment() {
             Status.SUCCESS -> {
                 hideProgress()
                 showMessage(R.string.registration_success)
+                navigateToMain()
             }
             Status.ERROR -> {
                 hideProgress()
@@ -81,5 +78,9 @@ class SignUpFragment : BaseFragment() {
 
     private fun backToLogin() {
         findNavController().popBackStack()
+    }
+
+    private fun navigateToMain() {
+        findNavController().navigate(R.id.action_signUpFragment_to_listFragment)
     }
 }
