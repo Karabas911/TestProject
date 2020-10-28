@@ -10,7 +10,7 @@ class User(
 
     @ColumnInfo(name = "email") val email: String,
 
-    @ColumnInfo(name = "phone")val phone: String,
+    @ColumnInfo(name = "phone") val phone: String,
 
     @ColumnInfo(name = "password") val password: String
 )

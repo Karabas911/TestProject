@@ -47,10 +47,10 @@ class SignUpViewModel(
                 Log.d(TAG, "Verified: userId = $userId")
                 val user = User(userId, email, phone, password)
                 val savedUserRows = repository.saveUserData(user)
-                if (savedUserRows > 0){
+                if (savedUserRows > 0) {
                     sighUpEvent.value = Resource.success()
                     prefs.setLoginUserId(userId)
-                }else{
+                } else {
                     sighUpEvent.value = Resource.error(ERROR_REASON_DATABASE, R.string.error_save)
                 }
             }

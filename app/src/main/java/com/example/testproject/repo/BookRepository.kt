@@ -9,7 +9,7 @@ interface BookRepository {
 
     suspend fun updateList()
 
-    suspend fun updateBook(book:Book)
+    suspend fun updateBook(book: Book)
 
     suspend fun clearData()
 
