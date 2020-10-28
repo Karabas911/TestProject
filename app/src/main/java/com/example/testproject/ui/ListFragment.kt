@@ -6,15 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.testproject.BaseFragment
 import com.example.testproject.R
+import com.example.testproject.Resource
 import com.example.testproject.databinding.FragmentListBinding
+import com.example.testproject.model.Book
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ListFragment : Fragment() {
+class ListFragment : BaseFragment(), BookAdapter.LikeListener {
 
     companion object {
 
@@ -23,6 +24,8 @@ class ListFragment : Fragment() {
     private val viewModel: ListViewModel by viewModel()
 
     private var binding: FragmentListBinding? = null
+
+    private val bookAdapter = BookAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +38,8 @@ class ListFragment : Fragment() {
 
     private fun initUI() {
         binding?.run {
+            list.layoutManager = LinearLayoutManager(requireContext())
+            list.adapter = bookAdapter
             toolbar.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.menu_item_logout -> {
@@ -50,14 +55,35 @@ class ListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.getUserData().observe(viewLifecycleOwner, Observer { user ->
+        viewModel.getUserData().observe(viewLifecycleOwner, { user ->
             binding?.toolbar?.title = user.email
         })
-        viewModel.getListEvent().observe(viewLifecycleOwner, {onListEvent(it)})
+        viewModel.getListEvent().observe(viewLifecycleOwner, { onListEvent(it) })
+        viewModel.getBookList().observe(viewLifecycleOwner, { updateBookList(it) })
     }
 
-    private fun onListEvent(eventKey: Int) {
-        when(eventKey){
+    private fun updateBookList(books: List<Book>) {
+        bookAdapter.updateList(books)
+    }
+
+    private fun onListEvent(resource: Resource<Int>) {
+        when (resource.status) {
+            Status.SUCCESS -> {
+                hideProgress()
+                resource.data?.let { handleData(it) }
+            }
+
+            Status.ERROR -> {
+                hideProgress()
+                showMessage(resource.msgRes)
+            }
+
+            Status.LOADING -> showProgress()
+        }
+    }
+
+    private fun handleData(key: Int) {
+        when (key) {
             ListViewModel.EVENT_ON_USER_LOGGED_OUT -> navigateToAuth()
         }
     }
@@ -82,5 +108,9 @@ class ListFragment : Fragment() {
     override fun onDestroyView() {
         binding = null
         super.onDestroyView()
+    }
+
+    override fun onLikeClicked(book: Book) {
+        viewModel.onLikeClicked(book)
     }
 }

@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background_progress_dialog">#26050505</color>
+    <color name="item_background_color">#492FFCB1</color>
 </resources>

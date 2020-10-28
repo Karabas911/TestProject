@@ -3,12 +3,14 @@ package com.example.testproject.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "books")
 data class Book(
 
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey val id: Int,
 
     val name: String,
+
+    val image: String?,
 
     val author: String,
 
@@ -16,5 +18,5 @@ data class Book(
 
     val price: Double,
 
-    val favorite: Boolean = false
+    var favorite: Boolean = false
 )
