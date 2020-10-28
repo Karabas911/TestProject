@@ -21,4 +21,7 @@ interface UserDao {
     @Delete
     fun delete(user: User)
 
+    @Query("SELECT * FROM users WHERE id = :userId LIMIT 1")
+    suspend fun findById(userId: Int): User
+
 }

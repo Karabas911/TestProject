@@ -8,4 +8,6 @@ interface AuthRepository {
 
     suspend fun saveUserData(user: User): Long
 
+    suspend fun findById(userId: Int): User
+
 }

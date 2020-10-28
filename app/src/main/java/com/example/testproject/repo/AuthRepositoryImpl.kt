@@ -13,4 +13,8 @@ class AuthRepositoryImpl(private val userDao: UserDao) : AuthRepository {
         return userDao.insert(user)
     }
 
+    override suspend fun findById(userId: Int): User {
+        return userDao.findById(userId)
+    }
+
 }

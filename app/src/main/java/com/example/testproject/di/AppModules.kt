@@ -4,6 +4,7 @@ import androidx.room.Room
 import com.example.testproject.Constants
 import com.example.testproject.database.AppDatabase
 import com.example.testproject.di.AuthModule.authModule
+import com.example.testproject.di.ListModule.listModule
 import com.example.testproject.prefs.PreferenceHelper
 import com.example.testproject.prefs.PreferenceWrapper
 import com.example.testproject.prefs.PreferenceWrapperImpl
@@ -33,6 +34,7 @@ object AppModules {
     val appModules = arrayListOf(
         authModule,
         databaseModule,
-        prefsModule
+        prefsModule,
+        listModule
     )
 }
