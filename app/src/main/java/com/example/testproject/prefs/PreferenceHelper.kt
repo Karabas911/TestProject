@@ -32,6 +32,10 @@ object PreferenceHelper {
         }
     }
 
+    fun SharedPreferences.remove(key: String) {
+        edit { it.remove(key) }
+    }
+
     /**
      * finds value on given key.
      * [T] is the type of value

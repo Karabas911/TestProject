@@ -8,4 +8,5 @@ interface PreferenceWrapper {
 
     fun setLoginUserId(userId: Int)
 
+    fun removeLoggedInId()
 }

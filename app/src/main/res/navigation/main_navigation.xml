@@ -9,7 +9,7 @@
         android:id="@+id/authFragment"
         android:name="com.example.testproject.ui.SignInFragment"
         android:label="fragment_auth"
-        tools:layout="@layout/fragment_sign_in" >
+        tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_authFragment_to_listFragment"
             app:destination="@id/listFragment" />
@@ -22,10 +22,15 @@
         android:id="@+id/listFragment"
         android:name="com.example.testproject.ui.ListFragment"
         android:label="fragment_list"
-        tools:layout="@layout/fragment_list" >
+        tools:layout="@layout/fragment_list">
         <action
             android:id="@+id/action_listFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_authFragment"
+            app:destination="@id/authFragment"
+            app:popUpTo="@id/main_navigation"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -37,7 +42,7 @@
         android:id="@+id/signUpFragment"
         android:name="com.example.testproject.ui.SignUpFragment"
         android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" >
+        tools:layout="@layout/fragment_sign_up">
 
         <action
             android:id="@+id/action_signUpFragment_to_listFragment"

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.testproject.R
 import com.example.testproject.databinding.FragmentListBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -52,6 +53,13 @@ class ListFragment : Fragment() {
         viewModel.getUserData().observe(viewLifecycleOwner, Observer { user ->
             binding?.toolbar?.title = user.email
         })
+        viewModel.getListEvent().observe(viewLifecycleOwner, {onListEvent(it)})
+    }
+
+    private fun onListEvent(eventKey: Int) {
+        when(eventKey){
+            ListViewModel.EVENT_ON_USER_LOGGED_OUT -> navigateToAuth()
+        }
     }
 
     private fun showLogOutDialog() {
@@ -61,6 +69,10 @@ class ListFragment : Fragment() {
             .setPositiveButton(R.string.logout) { _, _ -> onLogoutClicked() }
             .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.dismiss() }
             .show()
+    }
+
+    private fun navigateToAuth() {
+        findNavController().navigate(R.id.action_listFragment_to_authFragment)
     }
 
     private fun onLogoutClicked() {

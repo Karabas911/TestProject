@@ -5,11 +5,14 @@ import com.example.testproject.Constants
 import com.example.testproject.database.AppDatabase
 import com.example.testproject.di.AuthModule.authModule
 import com.example.testproject.di.ListModule.listModule
+import com.example.testproject.network.ApiBookService
+import com.example.testproject.network.RetrofitProvider
 import com.example.testproject.prefs.PreferenceHelper
 import com.example.testproject.prefs.PreferenceWrapper
 import com.example.testproject.prefs.PreferenceWrapperImpl
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
+import retrofit2.Retrofit
 
 object AppModules {
 
@@ -31,10 +34,18 @@ object AppModules {
         single<PreferenceWrapper> { PreferenceWrapperImpl(prefs = get()) }
     }
 
+    private val networkModule = module {
+
+        single { RetrofitProvider.buildRetrofit() }
+
+        single { get<Retrofit>().create(ApiBookService::class.java) }
+    }
+
     val appModules = arrayListOf(
-        authModule,
         databaseModule,
+        networkModule,
         prefsModule,
-        listModule
+        listModule,
+        authModule
     )
 }
