@@ -11,7 +11,7 @@ interface BookDao {
     fun getBooks(): LiveData<List<Book>>
 
     @Query("SELECT * FROM books")
-    fun getBooksList(): List<Book>?
+    suspend fun getBooksList(): List<Book>?
 
     @Insert
     suspend fun insert(books: List<Book>)
