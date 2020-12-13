@@ -34,7 +34,7 @@ class BookRepositoryImpl(
     }
 
     private suspend fun wrapBooks(booksRemote: List<BookRemote>?): List<Book> {
-        return withContext(Dispatchers.IO) {
+        return withContext(Dispatchers.Default) {
             val booksList = arrayListOf<Book>()
             val localBooks = bookDao.getBooksList()
             booksRemote?.forEach { remote ->
